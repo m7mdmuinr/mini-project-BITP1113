@@ -68,11 +68,19 @@ while (!(cin >> n)) {
         while (true) {
             cout << "Borrow Date (DD MM YYYY): ";
             cin >> library[i].bDay >> library[i].bMonth >> library[i].bYear;
-            
-            if (isValidDate(library[i].bDay, library[i].bMonth, library[i].bYear)) {
-                break; 
-            }
-            cout << "Invalid Date! Please enter again.\n";
+
+if (cin.fail()) {
+    cin.clear();
+    cin.ignore(1000, '\n');
+    cout << "Invalid input! Please enter numbers only.\n";
+    continue;
+}
+
+if (isValidDate(library[i].bDay, library[i].bMonth, library[i].bYear)) {
+    break;
+}
+
+cout << "Invalid Date! Please enter again.\n";
         }
 
         // Input Return Date
@@ -80,10 +88,18 @@ while (!(cin >> n)) {
             cout << "Return Date (DD MM YYYY): ";
             cin >> library[i].rDay >> library[i].rMonth >> library[i].rYear;
 
-            if (isValidDate(library[i].rDay, library[i].rMonth, library[i].rYear)) {
-                break;
-            }
-            cout << "Invalid Date! Please enter again.\n";
+if (cin.fail()) {
+    cin.clear();
+    cin.ignore(1000, '\n');
+    cout << "Invalid input! Please enter numbers only.\n";
+    continue;
+}
+
+if (isValidDate(library[i].rDay, library[i].rMonth, library[i].rYear)) {
+    break;
+}
+
+cout << "Invalid Date! Please enter again.\n";
         }
         cin.ignore();
     }
