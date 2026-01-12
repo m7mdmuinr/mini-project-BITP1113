@@ -67,23 +67,49 @@ while (!(cin >> n)) {
         // Input Borrow Date
         while (true) {
             cout << "Borrow Date (DD MM YYYY): ";
-            cin >> library[i].bDay >> library[i].bMonth >> library[i].bYear;
-            
-            if (isValidDate(library[i].bDay, library[i].bMonth, library[i].bYear)) {
-                break; 
-            }
-            cout << "Invalid Date! Please enter again.\n";
+           cin >> library[i].bDay >> library[i].bMonth >> library[i].bYear;
+
+if (cin.fail()) {
+    cin.clear();
+    cin.ignore(1000, '\n');
+    cout << "Invalid input! Please enter numbers only.\n";
+    continue;
+}
+
+if (isValidDate(library[i].bDay, library[i].bMonth, library[i].bYear)) {
+    break;
+}
+
+cout << "Invalid Date! Please enter again.\n";
         }
 
         // Input Return Date
         while (true) {
             cout << "Return Date (DD MM YYYY): ";
-            cin >> library[i].rDay >> library[i].rMonth >> library[i].rYear;
+           cin >> library[i].rDay >> library[i].rMonth >> library[i].rYear;
 
-            if (isValidDate(library[i].rDay, library[i].rMonth, library[i].rYear)) {
-                break;
-            }
-            cout << "Invalid Date! Please enter again.\n";
+if (cin.fail()) {
+    cin.clear();
+    cin.ignore(1000, '\n');
+    cout << "Invalid input! Please enter numbers only.\n";
+    continue;
+}
+
+if (isValidDate(library[i].rDay, library[i].rMonth, library[i].rYear)) {
+    long long bTotal = convertToDays(
+    library[i].bDay, library[i].bMonth, library[i].bYear);
+long long rTotal = convertToDays(
+    library[i].rDay, library[i].rMonth, library[i].rYear);
+
+if (rTotal < bTotal) {
+    cout << "Return date cannot be before borrow date. Please enter again.\n";
+    continue;
+}
+
+break;
+}
+
+cout << "Invalid Date! Please enter again.\n";
         }
         cin.ignore();
     }
